@@ -29,4 +29,12 @@ sudo docker secret create credentials credentials.txt
 sed -i 's/192.168.1.14/999.999.9.99/g' configurations/systemConfig.json  
 #start stack  
 sudo docker stack deploy --compose-file docker-compose-swarm.yml impact  
+  
+  
+#reload the services
+sudo docker service scale impact_backend=0  
+sudo docker service scale impact_backend=1  
+sudo docker service scale impact_frontend=0  
+sudo docker service scale impact_frontend=1  
+  
 >>>>>>> 155d337bfdcaa10e7738945129b3595777d45b7b
