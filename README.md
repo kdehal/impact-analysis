@@ -1,5 +1,5 @@
 # impact-analysis
-git clone 
+git clone https://github.com/kdehal/impact-analysis.git
 #install docker
 sudo apt-get update -y
 curl -fsSL https://get.docker.com -o get-docker.sh
