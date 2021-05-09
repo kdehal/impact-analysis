@@ -9,8 +9,8 @@ sudo docker swarm init
 
 cd impact-analysis  
 #save secret  
-sude docker secret create credentials credentials.txt  
-#update ip address  
-sed 's/192.168.1.14/999.999.9.99/g' configurations\systemConfig.json  
+sudo docker secret create credentials credentials.txt  
+#update ip address, replace 999.999.9.99 with the IP address of the server
+sed -i 's/192.168.1.14/999.999.9.99/g' configurations/systemConfig.json  
 #start stack  
-docker stack deploy --compose-file docker-compose-swarm.yml impact  
+sudo docker stack deploy --compose-file docker-compose-swarm.yml impact  
