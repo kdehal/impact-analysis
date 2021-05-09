@@ -1,10 +1,9 @@
 <<<<<<< HEAD
 # impact-analysis
 git clone https://github.com/kdehal/impact-analysis.git
-
 cd impact-analysis
 chmod +x install.sh
-./install.sh
+./install.sh 999.999.99.999
   
   
 #reload the services
