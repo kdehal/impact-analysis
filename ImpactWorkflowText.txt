@@ -1,0 +1,43 @@
+String objectType="unknown";
+String number="unknown";
+String revision="unknown";
+
+wt.lifecycle.LifeCycleManaged lcm = (wt.lifecycle.LifeCycleManaged)primaryBusinessObject;
+String currentLifecycleState=lcm.getState().toString();
+System.out.println("Impact Object State:");
+System.out.println(currentLifecycleState);
+//String ValidReleaseStates="RELEASED";//read from properties
+String ValidReleaseStates=wt.util.WTProperties.getLocalProperties().getProperty("impact.release.states");
+List<String> ReleasedStateList = Arrays.asList(ValidReleaseStates.split(","));
+
+if (ReleasedStateList.contains(currentLifecycleState)){
+	if (primaryBusinessObject instanceof wt.part.WTPart){
+		objectType="PART";
+		number=((wt.part.WTPart)primaryBusinessObject).getNumber();
+		revision=((wt.part.WTPart)primaryBusinessObject).getVersionIdentifier().getValue();
+	}
+
+	if (primaryBusinessObject instanceof wt.doc.WTDocument){
+		objectType="DOCUMENT";
+		number=((wt.doc.WTDocument)primaryBusinessObject).getNumber();
+		revision=((wt.doc.WTDocument)primaryBusinessObject).getVersionIdentifier().getValue();
+		}
+		  
+	if (!objectType.equals("unknown")){
+		//read server address from properties
+		String impactServer=wt.util.WTProperties.getLocalProperties().getProperty("impact.server"); //http://192.168.1.14:8000
+		String connectionString=impactServer+"/Windchill/extractImpactInfo/"+objectType+"/"+number+"/"+revision;
+		System.out.println("Calling ImpactURL:");
+		System.out.println(connectionString);
+		java.net.URLConnection connection = new java.net.URL(connectionString).openConnection();
+		connection.setRequestProperty("Accept", "application/json");
+		//Get Response  
+		java.io.InputStream is = connection.getInputStream();
+		System.out.println("Response ImpactURL:");
+		System.out.println(connection.getContentType());
+	}
+}else{
+	;
+}
+
+
