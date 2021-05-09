@@ -1,0 +1,19 @@
+{
+    "LaserData":{
+        "Variables":["Name","Revision","ReferenceFiles"],
+        "Template":{
+            "IncludedBOMs":{
+                "Combine":{"IncludedBOMs":{"Number":"Name","Revision":"Revision"}},
+                "Type":"PART",
+                "Number|Revision":"IncludedBOMs"
+            },
+            "IncludedObjects":
+            {   
+                "Type":"DOCUMENT",
+                "Number|Revision":"ReferenceFiles"
+            },
+            "ExcludedBOMs":[],
+            "ExcludedObjects":[]
+        }
+    }
+}
