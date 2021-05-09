@@ -3,7 +3,7 @@
 #install docker
 sudo apt-get update -y
 curl -fsSL https://get.docker.com -o get-docker.sh
-sudo source get-docker.sh
+sudo sh get-docker.sh
 #intialize swarm
 sudo docker swarm init
 #save secret
