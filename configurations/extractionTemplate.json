@@ -1,5 +1,5 @@
 {
-    "LaserData":{
+    "ManufacturingProcedure":{
         "Variables":["Name","Revision","ReferenceFiles"],
         "Template":{
             "IncludedBOMs":{
