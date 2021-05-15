@@ -2,7 +2,7 @@
 git clone https://github.com/kdehal/impact-analysis.git  
 cd impact-analysis  
 chmod +x install.sh  
-./install.sh 999.999.99.999  
+./install.sh <IP ADDRESS OR HOSTNAME OF YOUR SERVER>  
   
   
 #reload the services
