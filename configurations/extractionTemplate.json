@@ -1,9 +1,25 @@
 {
     "ManufacturingProcedure":{
-        "Variables":["Name","Revision","ReferenceFiles"],
+        "Variables":["IncludedBOMs","ReferenceFiles"],
         "Template":{
             "IncludedBOMs":{
-                "Combine":{"IncludedBOMs":{"Number":"Name","Revision":"Revision"}},
+                "Type":"PART",
+                "Number|Revision":"IncludedBOMs"
+            },
+            "IncludedObjects":
+            {   
+                "Type":"DOCUMENT",
+                "Number|Revision":"ReferenceFiles"
+            },
+            "ExcludedBOMs":[],
+            "ExcludedObjects":[]
+        }
+    },
+    "EngineeringDesign":{
+        "Variables":["Number","Revision","ReferenceFiles"],
+        "Template":{
+            "IncludedBOMs":{
+                "Combine":{"IncludedBOMs":{"Number":"Number","Revision":"Revision"}},
                 "Type":"PART",
                 "Number|Revision":"IncludedBOMs"
             },
