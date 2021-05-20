@@ -1,33 +1,46 @@
 {
     "ManufacturingProcedure":{
-        "Variables":["IncludedBOMs","ReferenceFiles"],
+        "Variables":["RequiredPartBOMs","RequiredParts","RequiredDocuments"],
         "Template":{
-            "IncludedBOMs":{
-                "Type":"PART",
-                "Number|Revision":"IncludedBOMs"
-            },
-            "IncludedObjects":
-            {   
-                "Type":"DOCUMENT",
-                "Number|Revision":"ReferenceFiles"
-            },
+            "IncludedBOMs":[
+                {
+                    "Type":"PART",
+                    "Number|Revision":"RequiredPartBOMs"
+                }
+            ],
+            "IncludedObjects":[
+                {   
+                    "Type":"PART",
+                    "Number|Revision":"RequiredParts"
+                },{
+                    "Type":"DOCUMENT",
+                    "Number|Revision":"RequiredDocuments"
+                }
+            ],
             "ExcludedBOMs":[],
             "ExcludedObjects":[]
         }
     },
     "EngineeringDesign":{
-        "Variables":["Number","Revision","ReferenceFiles"],
+        "Variables":["Number","Revision","RequiredParts","RequiredDocuments"],
         "Template":{
-            "IncludedBOMs":{
-                "Combine":{"IncludedBOMs":{"Number":"Number","Revision":"Revision"}},
-                "Type":"PART",
-                "Number|Revision":"IncludedBOMs"
-            },
+            "IncludedBOMs":[
+                {
+                    "Combine":{"RequiredPartBOMs":{"Number":"Number","Revision":"Revision"}},
+                    "Type":"PART",
+                    "Number|Revision":"RequiredPartBOMs"
+                }
+            ],
             "IncludedObjects":
-            {   
-                "Type":"DOCUMENT",
-                "Number|Revision":"ReferenceFiles"
-            },
+            [
+                {   
+                    "Type":"PART",
+                    "Number|Revision":"RequiredParts"
+                },{
+                    "Type":"DOCUMENT",
+                    "Number|Revision":"RequiredDocuments"
+                }
+            ],
             "ExcludedBOMs":[],
             "ExcludedObjects":[]
         }
