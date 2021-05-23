@@ -8,7 +8,8 @@ sudo sh get-docker.sh
 sudo docker swarm init
 #save secret
 cd impact-analysis
-sudo docker secret create credentials credentials.txt
+sudo docker secret create database-credentials database-credentials.txt
+sudo docker secret create windchill-credentials windchill-credentials.txt
 #update ip address, replace 999.999.9.99 with the IP address of the server
 sed -i "s/192.168.1.14/$HOSTNAME/g" configurations/systemConfig.json  
 #start stack
