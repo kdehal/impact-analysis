@@ -31,16 +31,7 @@
                     "Number|Revision":"RequiredPartBOMs"
                 }
             ],
-            "IncludedObjects":
-            [
-                {   
-                    "Type":"PART",
-                    "Number|Revision":"RequiredParts"
-                },{
-                    "Type":"DOCUMENT",
-                    "Number|Revision":"RequiredDocuments"
-                }
-            ],
+            "IncludedObjects":[],
             "ExcludedBOMs":[],
             "ExcludedObjects":[]
         }
