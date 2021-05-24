@@ -15,8 +15,8 @@ services:
     volumes:
       - ./configurations:/configurations
     secrets:
-      - source: credentials
-        target: "credentials.txt"
+      - database-credentials
+      - windchill-credentials        
 
   mongo:
       image: mongo
@@ -27,5 +27,7 @@ services:
         MONGO_INITDB_ROOT_PASSWORD: "example"
 
 secrets:
-  credentials:
+  database-credentials:
+    external: true
+  windchill-credentials:
     external: true
