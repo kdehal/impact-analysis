@@ -22,7 +22,7 @@
         }
     },
     "EngineeringDesign":{
-        "Variables":["Number","Revision","RequiredParts","RequiredDocuments"],
+        "Variables":["Number","Revision"],
         "Template":{
             "IncludedBOMs":[
                 {
