@@ -11,6 +11,6 @@ cd impact-analysis
 sudo docker secret create database-credentials.txt database-credentials.txt
 sudo docker secret create windchill-credentials.txt windchill-credentials.txt
 #update ip address, replace 999.999.9.99 with the IP address of the server
-sed -i "s/192.168.1.14/$HOSTNAME/g" configurations/systemConfig.json  
+sed -i "s/192.168.1.14/$1/g" configurations/systemConfig.json  
 #start stack
 sudo docker stack deploy --compose-file docker-compose-swarm.yml impact
