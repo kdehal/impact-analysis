@@ -8,7 +8,7 @@ System.out.println("Impact Object State:");
 System.out.println(currentLifecycleState);
 //String ValidReleaseStates="RELEASED";//read from properties
 String ValidReleaseStates=wt.util.WTProperties.getLocalProperties().getProperty("impact.release.states");
-List<String> ReleasedStateList = Arrays.asList(ValidReleaseStates.split(","));
+java.util.List<String> ReleasedStateList = java.util.Arrays.asList(ValidReleaseStates.split(","));
 
 if (ReleasedStateList.contains(currentLifecycleState)){
 	if (primaryBusinessObject instanceof wt.part.WTPart){
