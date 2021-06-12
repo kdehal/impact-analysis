@@ -1,22 +1,58 @@
 version: "3.9"
 services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.4
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+    # required so that traefik knows its working with docker swarm
+    - --providers.docker
+    - --providers.docker.swarmMode=true 
+    - --providers.docker.endpoint=unix:///var/run/docker.sock
+    # Do not expose all Docker services, only the ones explicitly exposed
+    - --providers.docker.exposedbydefault=false
+    - --api.insecure=true # enables the dashboard (automatically applies the following command --entrypoints.traefik.address=:8080)
+    - --entrypoints.https.address=:443 # add this line so that traefik monitors port 443, the entrypoint is called https
+    - --entrypoints.http.address=:80 # add this line so that traefik monitors port 80, the entrypoint is called http
+    - --entrypoints.frontend.address=:3000 # current front end port
+    - --entrypoints.backend.address=:8000 # current front end port
+    ports:
+      - "80:80" # The HTTP port
+      - "8080:8080" # The Web UI (enabled by --api.insecure=true)
+      - "443:443" # HTTPS port
+      - "3000:3000" #frontend port
+      - "8000:8000" #backend port
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock #required so that traefik can talk with docker swarm
 
   frontend:
     image: affinityplm/impactanalysis-frontend:0.1
-    ports:
-      - "3000:3000"
     volumes:
       - ./configurations:/app/src/configurations
+    deploy:
+      labels:
+        - "traefik.enable=true" #this docker service should use traefik
+        - "traefik.http.routers.frontend.rule=PathPrefix(`/`)" #all docker services need a 'router', and that router needs at least one rule, this router is called 'whoami', the rule is any data that's path starts with "/" (which is everything)
+        # by default, docker routers listen to all the data flowing through traefix ports (listens to all entrypoint)
+        - "traefik.http.routers.frontend.entrypoints=frontend" #this line tells the router to only watch specific entrypoints
+        - "traefik.http.services.frontend.loadbalancer.server.port=3000" #this tells the 'whoami' router that it once it finds valid data, send it to port 80 of this service/container
+        - "traefik.http.routers.frontend.tls=true"
 
   backend:
     image: affinityplm/impactanalysis-backend:0.1
-    ports:
-      - "8000:80"
     volumes:
       - ./configurations:/configurations
     secrets:
       - database-credentials.txt
-      - windchill-credentials.txt      
+      - windchill-credentials.txt
+    deploy:
+      labels:
+        - "traefik.enable=true" #this docker service should use traefik
+        - "traefik.http.routers.backend.rule=PathPrefix(`/`)" #all docker services need a 'router', and that router needs at least one rule, this router is called 'whoami', the rule is any data that's path starts with "/" (which is everything)
+        # by default, docker routers listen to all the data flowing through traefix ports (listens to all entrypoint)
+        - "traefik.http.routers.backend.entrypoints=backend" #this line tells the router to only watch specific entrypoints
+        - "traefik.http.services.backend.loadbalancer.server.port=80" #this tells the 'whoami' router that it once it finds valid data, send it to port 80 of this service/container 
+        - "traefik.http.routers.backend.tls=true" 
 
   mongo:
       image: mongo
