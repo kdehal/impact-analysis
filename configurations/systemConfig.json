@@ -7,14 +7,14 @@
         "databaseName":"impact_database"
     },
     "backend":{
-        "serverAddress":"http://192.168.1.14:8000"
+        "serverAddress":"https://192.168.1.14:8000"
     },
     "frontend":{
         "origins":[ 
-            "http://192.168.1.14:3000",
-            "http://HOSTNAME:3000",
-            "http://localhost:3000",
-            "http://172.0.0.1:3000"
+            "https://192.168.1.14:3000",
+            "https://HOSTNAME:3000",
+            "https://localhost:3000",
+            "https://172.0.0.1:3000"
          ]
     },
     "windchill":{
