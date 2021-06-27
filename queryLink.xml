@@ -1,0 +1,17 @@
+<%@page language="java" access="http|soap|external"%>
+<%@taglib uri="http://www.ptc.com/infoengine/taglib/core" prefix="ie"%>
+<%
+String instance = com.infoengine.au.NamingService.getVMName();
+%>
+
+
+<ie:webject name="Query-Links" type="OBJ"> 
+<ie:param name="INSTANCE" data="<%=instance%>"/> 
+<ie:param name="DIRECTION" data="$(@form[]direction[])"/> 
+<ie:param name="OBJECT_REF" data="$(@form[]oid[])"/> 
+<ie:param name="TYPE" data="$(@form[]linktype[])"/> 
+<ie:param name="OUTPUT_TYPE" data="RELATION"/> 
+<ie:param name="GROUP_OUT" data="ieoutput"/> 
+</ie:webject> 
+
+direction=usedby&oid=VR:wt.doc.WTDocument:123&linktype=wt.part.DescribedbyLink
