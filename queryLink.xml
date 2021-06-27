@@ -1,4 +1,4 @@
-<%@page language="java" access="http|soap|external"%>
+<%@page language="java" access="http"%>
 <%@taglib uri="http://www.ptc.com/infoengine/taglib/core" prefix="ie"%>
 <%
 String instance = com.infoengine.au.NamingService.getVMName();
@@ -10,8 +10,20 @@ String instance = com.infoengine.au.NamingService.getVMName();
 <ie:param name="DIRECTION" data="$(@form[]direction[])"/> 
 <ie:param name="OBJECT_REF" data="$(@form[]oid[])"/> 
 <ie:param name="TYPE" data="$(@form[]linktype[])"/> 
-<ie:param name="OUTPUT_TYPE" data="RELATION"/> 
+<ie:param name="OUTPUT_TYPE" data="OTHER_SIDE"/> 
 <ie:param name="GROUP_OUT" data="ieoutput"/> 
 </ie:webject> 
 
-direction=usedby&oid=VR:wt.doc.WTDocument:123&linktype=wt.part.DescribedbyLink
+<!--
+document to describes wtpart
+http://dev-plm.affinityplm.com/Windchill/servlet/IE/tasks/com/affinityplm/queryLink.xml?direction=describes&oid=VR:wt.doc.WTDocument:94180&linktype=wt.part.WTPartDescribeLink
+
+document to references document
+http://dev-plm.affinityplm.com/Windchill/servlet/IE/tasks/com/affinityplm/queryLink.xml?direction=describedBy&oid=VR:wt.doc.WTDocument:94180&linktype=wt.doc.WTDocumentDependencyLink 
+
+part to describedy document
+http://dev-plm.affinityplm.com/Windchill/servlet/IE/tasks/com/affinityplm/queryLink.xml?direction=describedBy&oid=VR:wt.part.WTPart:98533&linktype=wt.part.WTPartDescribeLink
+
+part to references document
+http://dev-plm.affinityplm.com/Windchill/servlet/IE/tasks/com/affinityplm/queryLink.xml?direction=references&oid=VR:wt.part.WTPart:98533&linktype=wt.part.WTPartReferenceLink
+-->
