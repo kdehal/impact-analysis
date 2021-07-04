@@ -12,16 +12,18 @@ services:
     # Do not expose all Docker services, only the ones explicitly exposed
     - --providers.docker.exposedbydefault=false
     - --api.insecure=true # enables the dashboard (automatically applies the following command --entrypoints.traefik.address=:8080)
-    - --entrypoints.https.address=:443 # add this line so that traefik monitors port 443, the entrypoint is called https
-    - --entrypoints.http.address=:80 # add this line so that traefik monitors port 80, the entrypoint is called http
-    - --entrypoints.frontend.address=:3000 # current front end port
-    - --entrypoints.backend.address=:8000 # current front end port
+    #- --entrypoints.web-secure.address=:443 # add this line so that traefik monitors port 443, the entrypoint is called web-secure
+    - --entrypoints.web.address=:80 # add this line so that traefik monitors port 80, the entrypoint is called http
+    - --entrypoints.frontend.address=:443 # current front end port
+    - --entrypoints.backend.address=:8443 # current front end port
+    - --entrypoints.web.http.redirections.entryPoint.to=frontend
+    - --entrypoints.web.http.redirections.entryPoint.scheme=https
     ports:
       - "80:80" # The HTTP port
       - "8080:8080" # The Web UI (enabled by --api.insecure=true)
-      - "443:443" # HTTPS port
-      - "3000:3000" #frontend port
-      - "8000:8000" #backend port
+      #- "443:443" # HTTPS port
+      - "443:443" #frontend port
+      - "8443:8443" #backend port
     volumes:
       - //var/run/docker.sock:/var/run/docker.sock #required so that traefik can talk with docker swarm
 
