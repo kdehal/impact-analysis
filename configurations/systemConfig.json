@@ -1,6 +1,6 @@
 {
     "database":{
-        "serverAddress":"192.168.1.14:27017",
+        "serverAddress":"192.168.1.14",
         "ssl":false,
         "tlsCAFile":"rds-combined-ca-bundle.pem",
         "retryWrites":false,
@@ -11,10 +11,10 @@
     },
     "frontend":{
         "origins":[ 
-            "https://192.168.1.14:443",
-            "https://HOSTNAME:443",
-            "https://localhost:443",
-            "https://172.0.0.1:443"
+            "https://192.168.1.14",
+            "https://kdehal-Laptop",
+            "https://localhost",
+            "https://172.0.0.1"
          ]
     },
     "windchill":{
