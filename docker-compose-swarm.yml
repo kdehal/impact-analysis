@@ -28,7 +28,7 @@ services:
       - //var/run/docker.sock:/var/run/docker.sock #required so that traefik can talk with docker swarm
 
   frontend:
-    image: affinityplm/impactanalysis-frontend:0.1
+    image: affinityplm/impactanalysis-frontend:0.2
     volumes:
       - ./configurations:/app/src/configurations
     deploy:
@@ -41,7 +41,7 @@ services:
         - "traefik.http.routers.frontend.tls=true"
 
   backend:
-    image: affinityplm/impactanalysis-backend:0.1
+    image: affinityplm/impactanalysis-backend:0.2
     volumes:
       - ./configurations:/configurations
     secrets:

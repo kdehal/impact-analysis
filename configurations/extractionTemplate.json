@@ -1,20 +1,11 @@
 {
-    "ManufacturingProcedure":{
-        "Variables":["RequiredPartBOMs","RequiredParts","RequiredDocuments"],
+    "InspectionProcedure":{
+        "Variables":[],
         "Template":{
-            "IncludedBOMs":[
-                {
-                    "Type":"PART",
-                    "Number|Revision":"RequiredPartBOMs"
-                }
-            ],
+            "IncludedBOMs":[],
             "IncludedObjects":[
-                {   
-                    "Type":"PART",
-                    "Number|Revision":"RequiredParts"
-                },{
-                    "Type":"DOCUMENT",
-                    "Number|Revision":"RequiredDocuments"
+                {
+                    "Links":["DescribedbyPart","ReferencedbyDocument"]
                 }
             ],
             "ExcludedBOMs":[],
@@ -27,6 +18,21 @@
             "IncludedBOMs":[
                 {
                     "Combine":{"RequiredPartBOMs":{"Number":"Number","Revision":"Revision"}},
+                    "Type":"PART",
+                    "Number|Revision":"RequiredPartBOMs"
+                }
+            ],
+            "IncludedObjects":
+            [],
+            "ExcludedBOMs":[],
+            "ExcludedObjects":[]
+        }
+    },
+    "AssemblyProcedure":{
+        "Variables":["RequiredPartBOMs"],
+        "Template":{
+            "IncludedBOMs":[
+                {
                     "Type":"PART",
                     "Number|Revision":"RequiredPartBOMs"
                 }
