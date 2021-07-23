@@ -50,11 +50,19 @@ services:
     deploy:
       labels:
         - "traefik.enable=true" #this docker service should use traefik
-        - "traefik.http.routers.backend.rule=PathPrefix(`/`)" #all docker services need a 'router', and that router needs at least one rule, this router is called 'whoami', the rule is any data that's path starts with "/" (which is everything)
+        - "traefik.http.routers.backend.rule=PathPrefix(`/api`)||PathPrefix(`/docs`)||PathPrefix(`/openapi.json`)" #all docker services need a 'router', and that router needs at least one rule, this router is called 'whoami', the rule is any data that's path starts with "/" (which is everything)
         # by default, docker routers listen to all the data flowing through traefix ports (listens to all entrypoint)
-        - "traefik.http.routers.backend.entrypoints=backend" #this line tells the router to only watch specific entrypoints
+        - "traefik.http.routers.backend.entrypoints=frontend" #this line tells the router to only watch specific entrypoints
         - "traefik.http.services.backend.loadbalancer.server.port=80" #this tells the 'whoami' router that it once it finds valid data, send it to port 80 of this service/container 
         - "traefik.http.routers.backend.tls=true" 
+    
+  worker:
+    image: affinityplm/impactanalysis-worker:0.1
+    volumes:
+      - ./configurations:/configurations
+    secrets:
+      - database-credentials.txt
+      - windchill-credentials.txt  
 
   mongo:
       image: mongo
@@ -63,6 +71,12 @@ services:
       environment:
         MONGO_INITDB_ROOT_USERNAME: "root"
         MONGO_INITDB_ROOT_PASSWORD: "example"
+
+  messagebroker:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
 secrets:
   database-credentials.txt:

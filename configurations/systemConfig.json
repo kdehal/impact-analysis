@@ -7,7 +7,7 @@
         "databaseName":"impact_database"
     },
     "backend":{
-        "serverAddress":"https://192.168.1.14:8443"
+        "serverAddress":"https://192.168.1.14:443"
     },
     "frontend":{
         "origins":[ 
@@ -20,5 +20,8 @@
     "windchill":{
         "serverAddress":"http://dev-plm.affinityplm.com/Windchill",
         "PartView":"Design"
+    },
+    "messageBroker":{
+        "serverAddress":"messagebroker"
     }
 }
