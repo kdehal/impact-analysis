@@ -1,17 +1,17 @@
 {
     "database":{
-        "serverAddress":"192.168.1.14",
+        "serverAddress":"database",
         "ssl":false,
         "tlsCAFile":"rds-combined-ca-bundle.pem",
         "retryWrites":false,
         "databaseName":"impact_database"
     },
     "backend":{
-        "serverAddress":"https://192.168.1.14:443"
+        "serverAddress":"https://backend:443"
     },
     "frontend":{
         "origins":[ 
-            "https://192.168.1.14",
+            "https://frontend",
             "https://kdehal-Laptop",
             "https://localhost",
             "https://172.0.0.1"
