@@ -47,6 +47,7 @@ services:
     secrets:
       - database-credentials.txt
       - windchill-credentials.txt
+      - messagebroker-credentials.txt 
     deploy:
       labels:
         - "traefik.enable=true" #this docker service should use traefik
@@ -62,7 +63,8 @@ services:
       - ./configurations:/configurations
     secrets:
       - database-credentials.txt
-      - windchill-credentials.txt  
+      - windchill-credentials.txt
+      - messagebroker-credentials.txt  
 
   mongo:
       image: mongo
@@ -84,4 +86,6 @@ secrets:
   database-credentials.txt:
     external: true
   windchill-credentials.txt:
+    external: true
+  messagebroker-credentials.txt:
     external: true
