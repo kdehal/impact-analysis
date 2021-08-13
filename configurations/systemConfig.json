@@ -1,6 +1,6 @@
 {
     "database":{
-        "serverAddress":"database",
+        "serverAddress":"mongo",
         "ssl":false,
         "tlsCAFile":"rds-combined-ca-bundle.pem",
         "retryWrites":false,
@@ -12,7 +12,6 @@
     "frontend":{
         "origins":[ 
             "https://frontend",
-            "https://kdehal-Laptop",
             "https://localhost",
             "https://172.0.0.1"
          ]
@@ -21,7 +20,7 @@
         "serverAddress":"http://dev-plm.affinityplm.com/Windchill",
         "PartView":"Design"
     },
-    "messageBroker":{
+    "messagebroker":{
         "serverAddress":"messagebroker"
     }
 }

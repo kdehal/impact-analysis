@@ -15,7 +15,7 @@ services:
     #- --entrypoints.web-secure.address=:443 # add this line so that traefik monitors port 443, the entrypoint is called web-secure
     - --entrypoints.web.address=:80 # add this line so that traefik monitors port 80, the entrypoint is called http
     - --entrypoints.frontend.address=:443 # current front end port
-    - --entrypoints.backend.address=:8443 # current front end port
+    # - --entrypoints.backend.address=:8443 # current front end port
     - --entrypoints.web.http.redirections.entryPoint.to=frontend
     - --entrypoints.web.http.redirections.entryPoint.scheme=https
     ports:
@@ -23,7 +23,7 @@ services:
       - "8080:8080" # The Web UI (enabled by --api.insecure=true)
       #- "443:443" # HTTPS port
       - "443:443" #frontend port
-      - "8443:8443" #backend port
+      # - "8443:8443" #backend port
     volumes:
       - //var/run/docker.sock:/var/run/docker.sock #required so that traefik can talk with docker swarm
 
@@ -77,6 +77,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    volumes:
+      - ./configurations/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
 
 secrets:
   database-credentials.txt:
